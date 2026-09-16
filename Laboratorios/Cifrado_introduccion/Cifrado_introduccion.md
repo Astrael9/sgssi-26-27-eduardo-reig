@@ -21,7 +21,7 @@ sudo apt install steghide -y
 Preparar mensaje:
 
 ```bash
-echo "SGSSI-26-27 Software is like sex: it's better when it's free" > msg_linus
+echo "SGSSI-26-27 Software is like wine: it gets better with time" > msg_linus
 ```
 
 Insertar mensaje con contraseña en imagen `linus.jpg`:
@@ -76,6 +76,10 @@ sha256sum linus_steg.jpg
 ¿Coinciden? 
 
 Hay un mensaje importante de Buenaventura Durruti para vosotros en una de las imagenes del directorio `durruti`. El mensaje ha sido introducido mediante el programa steghide, con contraseña "durruti". La imagen que contiene el mensaje se corresponde con el Hash (SHA256) `7d573924d70a604cb56122aed9bded3f40d3083d8adc353a97c0b816c0e573bb`. ¿Qué archivo es? ¿Qué dice la frase? ¿Como automatizarías la búsqueda si tuvieses muchos archivos en carpetas y subcarpetas?
+```bash
+sha256sum durruti/* | grep 7d573924d70a604cb56122aed9bded3f40d3083d8adc353a97c0b816c0e573bb
+```
+
 
 ## Contraseñas y sal
 
