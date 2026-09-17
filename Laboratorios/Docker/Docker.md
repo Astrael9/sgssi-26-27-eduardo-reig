@@ -72,6 +72,10 @@ docker pull hello-world
 Pregunta:
 
 - ¿Con qué comando se suben imagenes a Docker Hub desde nuestro repositorio local?
+```bash
+docker push TU_USUARIO/REPOSITORIO:ETIQUETA
+```
+
 
 ## 4. Ejecutar containers
 
@@ -153,7 +157,8 @@ Por ejemplo:
 
 Pregunta:
 
-- Cuando ejecutemos un contenedor a partir de esta imagen, ¿Qué output vamos a obtener? ¿Por qué?
+- Cuando ejecutemos un contenedor a partir de esta imagen, ¿Qué output vamos a obtener? ¿Por qué?  
+*Obtendremos la fecha y hora en la que se creó la imagen que usamos, porque el fichero **dockerfile** se ejecuta en la creación de la imagen, no más tarde*
 
 Vamos a construir una imagen a partir del [Dockerfile de este repositorio](Dockerfile):
 
