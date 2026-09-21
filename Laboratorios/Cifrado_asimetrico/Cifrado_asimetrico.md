@@ -94,11 +94,16 @@ hqLrPTy2euh/O45VyZSigvW+QgM=
 -----END PGP PUBLIC KEY BLOCK-----
 ```
 
-El commit aparece como verificado en GitHub (“Verified”). ¿Esto qué quiere decir?
+> El commit aparece como verificado en GitHub (“Verified”). ¿Esto qué quiere decir?  
+*Significa que GitHub valida la firma del commit, confirmado su autenticidad e integridad*
 
 ![GitHub Commit](github_commit.png)
 
-> Verifica ese mismo commit en tu ordenador local. ¿Qué pasos tienes que seguir?
+> Verifica ese mismo commit en tu ordenador local. ¿Qué pasos tienes que seguir?  
+*Primero introduzco la clave pública GPG en mi repositorio de claves, la firmo y después con el siguiente comando verificamos que el commit es bueno*
+``` bash
+git verify-commit <hash>
+```
 
 > Usa tus claves GPG para firmar un commit en el repositorio GitHub de la asignatura, de modo que aparezca como “Verified” al verlo en GitHub. Verifica los commits firmados por otros estudiantes.
 
@@ -107,14 +112,34 @@ El commit aparece como verificado en GitHub (“Verified”). ¿Esto qué quiere
 Es importante que seáis capaces de usar vuestras claves en otros equipos, sobre todo de cara al examen.
 
 > ¿Cómo se exporta una clave GPG para poder usarla en otro equipo?
+```bash
+    gpg --armor --export 'Mi nombre o ID de clave'
+```
 
 Puede pasar que una clave quede comprometida.
 
-> ¿Cómo revocarías tu clave?
+> ¿Cómo revocarías tu clave?  
+*Utilizando lols siguientes comandos*
+```bash
+    # Generar el fichero con la clave revocada firmada
+    gpg --output revoked.asc --gen-revoke 'ID de clave'
+    # Para aplicar la revocación en mi sistema:
+    gpg --import revoked.asc
+    # Para publicar la revocación al servidor
+    gpg --keyserver keys.openpgp.org --send-keys 'ID de clave'
+```
 
 Aunque su función principal es el cifrado asimétrico, GPG también se puede usar para cifrado simétrico.
 
-> ¿Como cifrarías este documento de manera simétrica, y qué pasos seguirías para que el receptor lo descifre?
+> ¿Como cifrarías este documento de manera simétrica, y qué pasos seguirías para que el receptor lo descifre?  
+*Con el siguiente comando lo cifraría de forma simétrica con el cifrado AES256, me pedirá una clave de paso para que en destino se pueda descifrar*
+```bash
+    gpg --symmetric --cipher-algo AES256 archivo.txt
+```
+*Para descifrarlo se hace con el siguiente comando, tras el cual nos pedirán la clave de paso*
+```bash
+    gpg --decrypt archivo.txt.gpg > archivo_descifrado.txt
+```
 
 ## RSA
 
@@ -137,4 +162,4 @@ openssl rsa -pubout -in clave.pem -out clave_publica.pem
 
 Encripta un mensaje con la clave publica mediante `openssl pkeyutl -encrypt`. Descífralo con la clave privada y comprueba que el mensaje coincide. 
 
-> RSA sirve para archivos pequeños. ¿Cómo implementarías un cifrado híbrido, usando AES para cifrar el archivo de manera simétrica y RSA para cifrar la clave AES? 
+> RSA sirve para archivos pequeños. ¿Cómo implementarías un cifrado híbrido, usando AES para cifrar el archivo de manera simétrica y RSA para cifrar la clave AES?  
