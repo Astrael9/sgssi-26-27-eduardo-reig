@@ -33,7 +33,8 @@ Una vez creadas las claves, para verlas:
 gpg --list-keys
 ```
 
-> ¿Qué quiere decir `[ultimate]`?
+> ¿Qué quiere decir `[ultimate]`?  
+*Que la confianza en el usuario es absoluta
 
 Es importante que la clave pública esté accesible. Se puede publicar en una página [web personal](https://mikel-egana-aranguren.github.io/contact/), se puede enviar adjunta en un email, o se puede publicar en servidores específicos como **keys.openpgp.org** (Ver más adelante).
 
@@ -72,7 +73,8 @@ Vamos a recrear el anillo de claves de la sección anterior, pero sólo con las 
 
 En la página web de los desarrolladores de [Enigmail](http://www.enigmail.net/download) se pueden descargar dos ficheros, la extensión para Thunderbird (`.xpi`) y otro fichero llamado “GPG Signature”.
 
-> ¿Para qué sirve ese segundo fichero?¿Cómo se usa?
+> ¿Para qué sirve ese segundo fichero?¿Cómo se usa?  
+*El fichero GPG signature es una firma digital que verifica que el instalador sea el original*
 
 En GitHub existe la opción de firmar commits mediante GPG, para aumentar la seguridad y trazabilidad de dichos commits. El profesor ha firmado el commit con el Hash `6176ac9c479797c698b153c7750fa3e4421f445d` de la rama `develop` del repositorio de apuntes de la asignatura [EHU-SGSSI-01](https://github.com/mikel-egana-aranguren/EHU-SGSSI-01), con la clave privada generada a la vez que la siguiente clave pública (`mikel.egana.aranguren@gmail.com`):
 
