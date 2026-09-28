@@ -178,4 +178,11 @@ openssl enc -aes-256-cbc -pbkdf2 -in archivo.txt -out archivo.enc -pass file:cla
 openssl pkeyutl -encrypt -pubin -inkey publica.pem -in clave_aes.key -out clave_aes.enc
 # Eliminar la clave AES en texto plano por seguridad
 rm clave_aes.key
+
+# 3) Descifrar la clave AES usando la clave privada RSA
+openssl pkeyutl -decrypt -inkey privada.pem -in clave_aes.enc -out clave_aes.key
+# Descifrar el archivo usando la clave AES recuperada
+openssl enc -d -aes-256-cbc -pbkdf2 -in archivo.enc -out archivo_descifrado.txt -pass file:clave_aes.key
+# Eliminar la clave AES temporal recuperada
+rm clave_aes.key
 ```
