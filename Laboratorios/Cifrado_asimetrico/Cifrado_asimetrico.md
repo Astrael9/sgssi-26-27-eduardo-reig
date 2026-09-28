@@ -34,7 +34,7 @@ gpg --list-keys
 ```
 
 > ¿Qué quiere decir `[ultimate]`?  
-*Que la confianza en el usuario es absoluta
+*Que la confianza en el usuario es absoluta*
 
 Es importante que la clave pública esté accesible. Se puede publicar en una página [web personal](https://mikel-egana-aranguren.github.io/contact/), se puede enviar adjunta en un email, o se puede publicar en servidores específicos como **keys.openpgp.org** (Ver más adelante).
 
@@ -119,7 +119,7 @@ Es importante que seáis capaces de usar vuestras claves en otros equipos, sobre
 Puede pasar que una clave quede comprometida.
 
 > ¿Cómo revocarías tu clave?  
-*Utilizando lols siguientes comandos*
+*Utilizando los siguientes comandos*
 ```bash
     # Generar el fichero con la clave revocada firmada
     gpg --output revoked.asc --gen-revoke 'ID de clave'
@@ -163,3 +163,19 @@ openssl rsa -pubout -in clave.pem -out clave_publica.pem
 Encripta un mensaje con la clave publica mediante `openssl pkeyutl -encrypt`. Descífralo con la clave privada y comprueba que el mensaje coincide. 
 
 > RSA sirve para archivos pequeños. ¿Cómo implementarías un cifrado híbrido, usando AES para cifrar el archivo de manera simétrica y RSA para cifrar la clave AES?  
+*Una vez generadas la clave asimétrica RSA y la clave simétrica AES, encriptamos el mensaje con la clave simétrica y la clave simétrica con la clave RSA*
+```bash
+# 1) Generar clave privada RSA
+openssl genpkey -algorithm RSA -out privada.pem -pkeyopt rsa_keygen_bits:2048
+# Extraer la clave pública RSA (la que se comparte)
+openssl rsa -pubout -in privada.pem -out publica.pem
+
+# 2) Generar una clave simétrica AES aleatoria de 256 bits (32 bytes)
+openssl rand -out clave_aes.key 32
+# Cifrar el archivo/mensaje con la clave simétrica AES
+openssl enc -aes-256-cbc -pbkdf2 -in archivo.txt -out archivo.enc -pass file:clave_aes.key
+# Cifrar la clave AES con la clave pública RSA del destinatario
+openssl pkeyutl -encrypt -pubin -inkey publica.pem -in clave_aes.key -out clave_aes.enc
+# Eliminar la clave AES en texto plano por seguridad
+rm clave_aes.key
+```
