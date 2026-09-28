@@ -88,11 +88,5 @@ sha256sum mensaje.txt mensaje.aes mensaje.3des mensaje.des
 sha256sum mensaje.aes.descifrado mensaje.3des.descifrado mensaje.des.descifrado
 ```
 
-¿Que quiere decir CBC en `-des-ede3-cbc`?¿Hay otras opciones?
-
-
-
-
-
-
-
+¿Que quiere decir CBC en `-des-ede3-cbc`?¿Hay otras opciones?  
+*Quiere decir Cipher Block Chaining, o Encadenamiento de Bloques de Cifrado*
