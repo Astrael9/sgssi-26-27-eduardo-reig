@@ -138,6 +138,5 @@ cd EHU-SGSSI-01/
 git log
 ```
 
-¿Qué identifica el hash del commit?¿Por qué Git detecta cambios de contenido de forma eficiente?
-
-
+¿Qué identifica el hash del commit?¿Por qué Git detecta cambios de contenido de forma eficiente?  
+*El hash del commit identifica el estado del repositorio, de modo que cualquier cambio en él supondría un cambio en su hash. Este sistema es altamente eficiente, ya que por medio del cálculo del hash de 2 estados del repositorio y su comparación se determina que hay cambios*
