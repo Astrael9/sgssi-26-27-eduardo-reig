@@ -42,7 +42,11 @@ Para enviar archivos que han sido cifrados en la línea de comandos mediante GPG
 
 - Cifrad este archivo y enviároslo entre vosotros de forma que consigáis los principios de **Confidencialidad**, **Integridad**, **Autenticidad** y **No Repudio**.
 
-> Razonad qué habéis tenido que hacer para conseguir cada uno de ellos.
+> Razonad qué habéis tenido que hacer para conseguir cada uno de ellos.  
+*Cifrando el mensaje con la clave pública del receptor y luego firmándolo con la clave privada del emisor se consiguen los 4 principios*
+```bash
+    gpg --sign --encrypt --recipient "destinatario@dominio.com" archivo.txt
+```
 
 ## Confianza sobre las claves GPG
 
