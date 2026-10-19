@@ -88,7 +88,7 @@ Ir a `Cloud SQL` > `Instances` > `Create free instance` (Cloud SQL gratis durant
 
 - Database Engine: `MySQL`.
 - Instance ID: `phonebook-db`.
-- Contraseña del usuario `root`.
+- Contraseña del usuario `root`. (Ha quedado desfasado, propuesta: `Root1234!`)
 - Versión de base de datos: `MySQL 8.0`.
 - Región: la misma que `db-subnet`.
 
