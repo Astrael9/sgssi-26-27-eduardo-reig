@@ -50,7 +50,7 @@ Además del tráfico entrante, en un firewall se puede bloquear el tráfico sali
 Por último, se puede bloquear el tráfico desde una dirección concreta.
 
 > ¿Cómo impedirías el tráfico entrante en el puerto 8890 desde tu IP actual? (Pista: «What is my IP?»).  
-> *Creando otra regla del firewall que bloquease el tráfico por dicho puerto solamente para la IP del host en cuestión. Para ello necesitaré conocer la IP pública que dicho host está empleando. Hay páginas web que te la indican
+> *Creando otra regla del firewall que bloquease el tráfico por dicho puerto solamente para la IP del host en cuestión. Para ello necesitaré conocer la IP pública que dicho host está empleando. Hay páginas web que te la indican*
 
 ## IPTables
 
