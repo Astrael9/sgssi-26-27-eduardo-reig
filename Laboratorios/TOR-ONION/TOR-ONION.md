@@ -54,6 +54,7 @@ Para encontrar contenidos hay que usar buscadores específicos o sitios donde se
 Para acceder a sitios ONION hay que usar un navegador TOR. Descarga el [navegador TOR oficial](https://www.torproject.org/download/) y úsalo para conectarte a [diferentes sitios](https://community.torproject.org/es/onion-services/), como por ejemplo el [New York Times](https://www.nytimesn7cgmftshazwhfgzm37qxb44r64ytbb2dj3x62d2lljsciiyd.onion/).
 
 > ¿Por qué crees que abundan los periódicos entre los sitios que ofrecen servicios ONION?
+> *En virtud de defender la libertad de expresión, pues ONION permite la distribución de contenidos que no estarían permitidos por medios tradicionales y protege la identidad de las personas involucradas en su publicación y consumo.*
 
 ## Servicio ONION en Google Cloud
 
