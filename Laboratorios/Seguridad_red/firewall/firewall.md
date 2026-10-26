@@ -72,10 +72,32 @@ Si quisiéramos que la restauración de reglas se hiciera de manera automática 
 
 Definid las reglas necesarias para conseguir lo siguiente:
 
-> Que vuestro servidor de Google Cloud solo acepte conexiones SSH desde el servidor de Google Cloud de otro alumno y desde vuestra máquina local.
+> Que vuestro servidor de Google Cloud solo acepte conexiones SSH desde el servidor de Google Cloud de otro alumno y desde vuestra máquina local.  
+> *Para ello necesiramos conocer las IP públicas que están empleando tanto mi máquina local como la de otro alumno. Entonces definimos en iptables reglas de entrada aceptada para el puerto 22 desde estas IP y denegamos la entrada desde cualquier otro lugar (esto también denegará la conexión SSH por el propio Google Cloud).*
+```bash
+    -A INPUT -s < IP MÁQUINA LOCAL > -p tcp --dport 22 -j ACCEPT
+    -A INPUT -s < IP_SERVER > -p tcp --dport 22 -j ACCEPT
+    -A INPUT -p tcp --dport 22 -j DROP
+``` 
 
-> Instalad un servicio FTP en vuestro servidor de Google Cloud y configuradlo para que solo acepte conexiones FTP desde máquinas de la red de `ehu.eus`.
+> Instalad un servicio FTP en vuestro servidor de Google Cloud y configuradlo para que solo acepte conexiones FTP desde máquinas de la red de `ehu.eus`.  
+>*Para esto la estrategia será utilizar el servicio FTP `vsftpd`, configurado para atender una serie de puertos privados. Entonces desde iptables abriremos el tráfico entrante tan solo a esa serie de puertos privados y al 21, que es desde donde se realizan las peticiones de FTP. La regla consistirá en dejar pasar cualquier petición a estos puertos que venga de la red de la universidad EHU, dominio ehu.eus, cuyo rango de IP podemos deducir (`ping ehu.eus` y por clase CIDR de la IP, que es B)*
+```bash
+    -A INPUT -s 158.227.0.0/16 -p tcp -m multiport --dports 21,40000:40010 -j ACCEPT
+    -A INPUT -p tcp -m multiport --dports 21,40000:40010 -j DROP   
+```
 
-> Que vuestro servidor de Google Cloud no acepte conexiones HTTP (solo HTTPS).
+> Que vuestro servidor de Google Cloud no acepte conexiones HTTP (solo HTTPS).  
+>*Añadimos una regla para la entrada de paquetes por el puerto 80 que deniege todas ellas.*
+```bash
+    -A INPUT -p tcp --dport 80 -j REJECT --reject-with tcp-reset
+```
 
-> Que en vuestra máquina local no se puedan hacer conexiones salientes a Twitter, Facebook ni YouTube.
+> Que en vuestra máquina local no se puedan hacer conexiones salientes a Twitter, Facebook ni YouTube.  
+>*Vamos a lograr eso añadiendo reglas en iptables para el campo OUTPUT, paquetes salientes de la máquina.*
+```bash
+    -A OUTPUT -d www.youtube.com -j REJECT
+    -A OUTPUT -d www.x.com -j REJECT
+    -A OUTPUT -d www.facebook.com -j REJECT
+
+```
