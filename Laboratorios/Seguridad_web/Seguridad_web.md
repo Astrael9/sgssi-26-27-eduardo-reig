@@ -35,7 +35,15 @@ Ir a https://www.zaproxy.org/download/, bajar el archivo `Linux package` y desco
 
 Elegir "Escaneo automático", http://localhost:80, y "atacar". Cuando termine el escaneo automático:
 
-> ¿Qué vulnerabilidades has encontrado? ¿A qué CVEs o CWEs se mapean?
+> ¿Qué vulnerabilidades has encontrado? ¿A qué CVEs o CWEs se mapean?  
+> *CVE - **Common Weakness Enumeration** y CWE - **Common Vulnerabilities and Exposures***
+> - *PII Disclosure: Filtración de información personal (CWE-539)*
+> - *Absence of Anti-CSRF Tokens: Ausencia de tokens anti falsificación de petición en sitios cruzados (Cross-site Request Forgery) (CWE-352)*
+> - *Application Error Disclosure: Filtrado de errores de aplciación (CWE-550)*
+> - *Content Security Policy (CSP) Header Not Set: Política de seguridad de contenido, cabecera asuente (CWE-693)*
+> - *Cross-Domain Misconfiguration: Falta de configuración entre dominios (CWE-264)*
+> - *Otros...*
 
-> Intenta realizar el escaneo en la IP Google Cloud proporcionada por el profesor, ¿Has encontrado las mismas vulnerabilidades?
+> Intenta realizar el escaneo en la IP Google Cloud proporcionada por el profesor, ¿Has encontrado las mismas vulnerabilidades?  
+> *No se hace*
 
