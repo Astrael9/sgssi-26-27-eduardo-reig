@@ -157,9 +157,18 @@ nmap -sS localhost
 ```
 
 > Vuelve a consultar `fast.log` y `eve.json`. ¿Ha generado alertas el escaneo? ¿Qué firma(s) han saltado?  
->
+> *No ha generado alertas Suricata porque el escaneo es de tipo SYN y no supone una violación de ninguna de las reglas que tiene configurada, se podría configurar una. Sin embargo, si realizamos un escaneo más agresivo, con la flag -A, sí que saltan las siguientes firmas: `ET SCAN Potential SSH Scan` y `SURICATA ICMPv4 unknown code`*
+```bash
+  11/02/2026-18:12:47.718566  [**] [1:2001219:20] ET SCAN Potential SSH Scan [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 212.230.190.62:41949 -> 10.204.0.5:22
+  11/02/2026-18:12:48.064151  [**] [1:2200025:2] SURICATA ICMPv4 unknown code [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {ICMP} 212.230.190.62:8 -> 10.204.0.5:9
+  11/02/2026-18:12:48.064184  [**] [1:2200025:2] SURICATA ICMPv4 unknown code [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {ICMP} 10.204.0.5:0 -> 212.230.190.62:9
+  11/02/2026-18:12:50.233293  [**] [1:2200025:2] SURICATA ICMPv4 unknown code [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {ICMP} 212.230.190.62:8 -> 10.204.0.5:9
+  11/02/2026-18:12:50.233325  [**] [1:2200025:2] SURICATA ICMPv4 unknown code [**] [Classification: Generic Protocol Command Decode] [Priority: 3] {ICMP} 10.204.0.5:0 -> 212.230.190.62:9
 
-> Cambia `HOME_NET` en `suricata.yaml` a un valor distinto (por ejemplo `[10.0.0.0/8]` en vez de `any`), reinicia Suricata (`sudo systemctl restart suricata`) y repite la prueba con `curl http://testmyids.com`. ¿Cambia el resultado? ¿Por qué `HOME_NET` afecta a qué tráfico se considera "entrante" o "saliente" en las reglas?
+```
+
+> Cambia `HOME_NET` en `suricata.yaml` a un valor distinto (por ejemplo `[10.0.0.0/8]` en vez de `any`), reinicia Suricata (`sudo systemctl restart suricata`) y repite la prueba con `curl http://testmyids.com`. ¿Cambia el resultado? ¿Por qué `HOME_NET` afecta a qué tráfico se considera "entrante" o "saliente" en las reglas?  
+>*HOME_NET se trata de una variable que se emplea para referirse al conjunto de direcciones que forman la red local en las reglas de Suricata, mientras que la variable EXTERNAL_NET se suele definir como todas las direcciones que no se encuentran en HOME_NET, de modo que modificar una altera la otra.
 
 ## Limpieza
 
