@@ -69,7 +69,11 @@ Suricata necesita un conjunto de reglas para saber qué tráfico es sospechoso. 
 sudo suricata-update
 ```
 
-> ¿Cuántas reglas se han descargado? (Pista: el propio comando lo indica al finalizar).
+> ¿Cuántas reglas se han descargado? (Pista: el propio comando lo indica al finalizar).  
+```bash
+  ...
+  2/11/2026 -- 09:15:45 - <Info> -- Loaded 69279 rules.
+```
 
 ## Ejecutar Suricata
 
@@ -108,7 +112,42 @@ sudo apt install -y jq
 sudo tail -n 5 /var/log/suricata/eve.json | jq 'select(.event_type=="alert")'
 ```
 
-> ¿Qué campos aparecen en el evento de tipo `alert` del fichero `eve.json`? ¿Qué información aportan `signature`, `severity` y `src_ip`/`dest_ip` frente al mensaje de `fast.log`?
+> ¿Qué campos aparecen en el evento de tipo `alert` del fichero `eve.json`? ¿Qué información aportan `signature`, `severity` y `src_ip`/`dest_ip` frente al mensaje de `fast.log`?  
+```bash
+"alert": {
+    "action": "allowed",
+    "gid": 1,
+    "signature_id": 2500006,
+    "rev": 7791,
+    "signature": "ET COMPROMISED Known Compromised or Hostile Host Traffic group 4",
+    "category": "Misc Attack",
+    "severity": 2,
+    "metadata": {
+      "affected_product": [
+        "Any"
+      ],
+      "attack_target": [
+        "Any"
+      ],
+      "created_at": [
+        "2011_04_28"
+      ],
+      "deployment": [
+        "Perimeter"
+      ],
+      "signature_severity": [
+        "Major"
+      ],
+      "tag": [
+        "COMPROMISED"
+      ],
+      "updated_at": [
+        "2026_10_30"
+      ]
+    }
+  }
+```
+>*`Signature` describe la alerta que ha saltado,`severity` muestra en una escala del 1 (alta) al 3 (baja) la gravedad de la detección,`src_ip` y `dest_ip` son las direcciones de los extremos de la conexión, quien la establece y quien la recibe, respectivamente. El fichero fast.log de suricata muestra esta misma información.*
 
 Probar ahora con un escaneo de puertos, instalando `nmap` si no está disponible:
 
@@ -117,7 +156,8 @@ sudo apt install -y nmap
 nmap -sS localhost
 ```
 
-> Vuelve a consultar `fast.log` y `eve.json`. ¿Ha generado alertas el escaneo? ¿Qué firma(s) han saltado?
+> Vuelve a consultar `fast.log` y `eve.json`. ¿Ha generado alertas el escaneo? ¿Qué firma(s) han saltado?  
+>
 
 > Cambia `HOME_NET` en `suricata.yaml` a un valor distinto (por ejemplo `[10.0.0.0/8]` en vez de `any`), reinicia Suricata (`sudo systemctl restart suricata`) y repite la prueba con `curl http://testmyids.com`. ¿Cambia el resultado? ¿Por qué `HOME_NET` afecta a qué tráfico se considera "entrante" o "saliente" en las reglas?
 
