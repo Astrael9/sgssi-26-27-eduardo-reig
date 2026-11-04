@@ -10,7 +10,7 @@
 
 Burp suite es una herramienta de pen-testing para realizar ataques a sistemas web. Vamos a usarla para realizar ataques a los sitios vulnerables que ofrece PortSwigger en sus [laboratorios](https://portswigger.net/web-security/all-labs).
 
-Para instalar BurpSuite, bajar el [instalador]((https://portswigger.net/burp/communitydownload)) y ejecutarlo. Elegir "community edition". Lanzar Burp Suite con buscador de aplicaciones.  
+Para instalar BurpSuite, bajar el [instalador](https://portswigger.net/burp/communitydownload) y ejecutarlo. Elegir "community edition". Lanzar Burp Suite con buscador de aplicaciones.  
 
 Ir a (http://localhost:8080/) y descargar certificado ("CA certificate"). Para añadir el certificado en Firefox, ir a Ajustes; Privacidad & Seguridad; Seguridad de la conexión y del software; Administrador de certificados; Import (Muy importante marcar las dos casillas de confiar). 
 
