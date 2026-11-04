@@ -153,7 +153,7 @@ Probar ahora con un escaneo de puertos, instalando `nmap` si no está disponible
 
 ```bash
 sudo apt install -y nmap
-nmap -sS localhost
+nmap -A <IP_PÚBLICA>
 ```
 
 > Vuelve a consultar `fast.log` y `eve.json`. ¿Ha generado alertas el escaneo? ¿Qué firma(s) han saltado?  
@@ -168,7 +168,7 @@ nmap -sS localhost
 ```
 
 > Cambia `HOME_NET` en `suricata.yaml` a un valor distinto (por ejemplo `[10.0.0.0/8]` en vez de `any`), reinicia Suricata (`sudo systemctl restart suricata`) y repite la prueba con `curl http://testmyids.com`. ¿Cambia el resultado? ¿Por qué `HOME_NET` afecta a qué tráfico se considera "entrante" o "saliente" en las reglas?  
->*HOME_NET se trata de una variable que se emplea para referirse al conjunto de direcciones que forman la red local en las reglas de Suricata, mientras que la variable EXTERNAL_NET se suele definir como todas las direcciones que no se encuentran en HOME_NET, de modo que modificar una altera la otra.
+>*HOME_NET se trata de una variable que se emplea para referirse al conjunto de direcciones que forman la red local en las reglas de Suricata, mientras que la variable EXTERNAL_NET se suele definir como todas las direcciones que no se encuentran en HOME_NET, de modo que modificar una altera la otra.*
 
 ## Limpieza
 
