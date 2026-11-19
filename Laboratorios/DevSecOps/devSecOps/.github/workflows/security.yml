@@ -1,0 +1,37 @@
+name: Pruebas y seguridad
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener el código
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias y herramientas
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt pytest bandit pip-audit
+
+      - name: Ejecutar pruebas
+        run: pytest
+
+      - name: Analizar código
+        run: bandit app.py
+
+      - name: Auditar dependencias
+        run: pip-audit -r requirements.txt
+
+      - name: Construir imagen
+        run: docker build -t devsecops-demo .
