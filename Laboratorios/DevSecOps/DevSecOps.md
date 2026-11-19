@@ -87,11 +87,14 @@ python -m pip install pytest bandit pip-audit
 python -m pytest
 ```
 
-> ¿Qué comprueba la prueba y qué información ofrece si falla?
+> ¿Qué comprueba la prueba y qué información ofrece si falla?  
+> *En la prueba se comprueba que la respuesta del servidor al cliente sea correcta (código http 200) y que el mensaje enviado sea el esperado*
 
-> ¿Por qué instalamos las dependencias en un entorno virtual?
+> ¿Por qué instalamos las dependencias en un entorno virtual?  
+> Para aislar los paquetes del proyecto de los del sistema y evitar así conflictos de versiones entre proyectos.
 
-> ¿Qué diferencia hay entre las dependencias de la aplicación y las herramientas de desarrollo?
+> ¿Qué diferencia hay entre las dependencias de la aplicación y las herramientas de desarrollo?  
+> *Las dependencias de la aplicación son módulos de código que forman parte del programa que se está desarrollando, mientras que las herramientas de desarrollo son programas que automatizan y simplifican flujos de trabajo durante la programación y ejecución, como el análisis de código y las pruebas*
 
 ## Analizar el código y las dependencias
 
@@ -109,11 +112,22 @@ pip-audit -r requirements.txt
 
 Si una herramienta informa de hallazgos, lee el detalle, identifica el archivo o paquete afectado y aplica una corrección. Vuelve a ejecutar las pruebas y los análisis para verificar el resultado.
 
-> ¿Qué tipo de problemas puede encontrar Bandit? ¿Qué problemas no puede descartar?
+> ¿Qué tipo de problemas puede encontrar Bandit? ¿Qué problemas no puede descartar?  
+> *Bandit realiza análisis estático de código (SAST) para detectar patrones o llamadas frecuentemente asociados a riesgos de seguridad. Puede detectar:*
+>- Comandos externos arriesgados: `eval`, `exec`, `os.system`
+>- Deserialización insegura
+>- Criptografía o aleatoriedad débil: algoritmos obsoletos (MD5, SHA1)
+>- Configuracione, rutas y secretos
+> *No puede descartar:*
+>- Vulnerabilidades en tiempo de ejecución
+>- Vulnerabilidades en dependencias de terceros
+>- Lógica compleja
 
-> ¿Por qué una prueba correcta no demuestra por sí sola que la aplicación sea segura?
+> ¿Por qué una prueba correcta no demuestra por sí sola que la aplicación sea segura?  
+> *Porque no es posible modelar todas las posibles interacciones con el programa y sus resultados correctos en una sola prueba*
 
 > ¿Qué información necesitas para decidir cómo responder a una vulnerabilidad de una dependencia?
+> *Primeramente ver a qué versiones afecta y cual es la que estamos utilizando nosotros. Para responder es necesario conocer la gravedad de la vulnerabilidad, así como el alcance y el impacto que esta puede tener dentro del código.*
 
 ## Construir y ejecutar un contenedor
 
@@ -148,13 +162,21 @@ docker run --rm -p 127.0.0.1:5000:5000 devsecops-demo
 
 Visita <http://127.0.0.1:5000/> y detén el contenedor con `Ctrl+C`.
 
-> ¿Qué instrucciones del Dockerfile instalan la dependencia y copian el código?
+> ¿Qué instrucciones del Dockerfile instalan la dependencia y copian el código?  
+ ```dockerfile
+ #Para instalar las dependencias
+ COPY requirements.txt .
+ RUN python -m pip install --no-cache-dir -r requirements.txt
+ ```
 
-> ¿Qué usuario ejecuta la aplicación dentro del contenedor?
+> ¿Qué usuario ejecuta la aplicación dentro del contenedor?  
+> *El usuario con id 10001* 
 
-> ¿Por qué el puerto se publica en `127.0.0.1` y no en todas las interfaces de red?
+> ¿Por qué el puerto se publica en `127.0.0.1` y no en todas las interfaces de red?  
+> *Porque solo queremos poder acceder a él desde nuestra máquina local, no que otras máquinas en la misma red puedan acceder también*
 
-> ¿Qué riesgos introduce incluir credenciales o archivos innecesarios en la imagen?
+> ¿Qué riesgos introduce incluir credenciales o archivos innecesarios en la imagen?  
+> *Quien tenga acceso a la imagen tendrá también acceso a los secretos* 
 
 Como comprobación adicional, puedes analizar la imagen con [Trivy](https://trivy.dev/). Para instalarlo, seguir las [instrucciones](https://trivy.dev/docs/latest/getting-started/installation/#debianubuntu-official):
 

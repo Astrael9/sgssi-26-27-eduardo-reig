@@ -1,3 +1,10 @@
+# environments
+.venv/
+
+# py cache
+__pycache__/
+.pytest_cache/
+
 # Logs
 logs
 *.log
