@@ -250,13 +250,17 @@ git push
 
 Consulta la pestaña **Actions** del repositorio y comprueba el resultado de cada paso. Si un control falla, revisa sus mensajes, corrige el problema y vuelve a subir los cambios.
 
-> ¿En qué eventos se ejecuta este flujo de trabajo?
+> ¿En qué eventos se ejecuta este flujo de trabajo?  
+> *Se ejecuta el flujo al actualizar o solicitar la actualización del repositorio (push o pull request)*
 
-> ¿Qué sucede con el flujo si una prueba o un análisis falla? (Prueba cambiando el test)
+> ¿Qué sucede con el flujo si una prueba o un análisis falla? (Prueba cambiando el test)  
+> *Si una prueba (pytest) o un control de seguridad (bandit, pip-audit, docker build) falla, el paso devuelve un código de salida distinto de cero, por lo que el job (checks) y el workflow completo se marcan como fallidos (failed / cruz roja en GitHub Actions). Los pasos posteriores no se ejecutan (salvo que se indique lo contrario), se muestra el registro (log) con el error concreto y, si hay reglas de protección de rama configuradas, puede bloquearse el merge de la pull request hasta corregirlo.*
 
->  ¿Por qué el workflow declara `contents: read` en vez de conceder permisos amplios?
+>  ¿Por qué el workflow declara `contents: read` en vez de conceder permisos amplios?  
+> *El enfoque de seguridad ha der ser siempre de mínima confianza, si con permisos de lectura es suficente, entonces no se le ha de otorgar más a la máquina* 
 
-> ¿Qué controles añadirías para comprobar secretos o analizar la imagen construida?
+> ¿Qué controles añadirías para comprobar secretos o analizar la imagen construida?  
+> *Con la herramienta de análisis `trivy` podríamos analizar la imagen docker y con otra herramietna de escaneo de secretos podríamos detectar problemas de filtraciones de claves.* 
 
 ## Mejora continua
 
