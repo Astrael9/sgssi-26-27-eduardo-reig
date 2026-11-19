@@ -29,7 +29,7 @@ jobs:
           python -m pip install -r requirements.txt pytest bandit pip-audit
 
       - name: Ejecutar pruebas
-        run: pytest test/test_app.py
+        run: python -m pytest
 
       - name: Analizar código
         run: bandit app.py
