@@ -149,7 +149,7 @@ sudo tail -n 5 /var/log/suricata/eve.json | jq 'select(.event_type=="alert")'
 ```
 >*`Signature` describe la alerta que ha saltado,`severity` muestra en una escala del 1 (alta) al 3 (baja) la gravedad de la detección,`src_ip` y `dest_ip` son las direcciones de los extremos de la conexión, quien la establece y quien la recibe, respectivamente. El fichero fast.log de suricata muestra esta misma información.*
 
-Probar ahora con un escaneo de puertos, instalando `nmap` si no está disponible:
+Probar ahora con un escaneo de puertos agresivo, instalando `nmap` si no está disponible:
 
 ```bash
 sudo apt install -y nmap

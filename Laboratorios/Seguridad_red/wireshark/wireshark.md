@@ -34,7 +34,7 @@ ip -br a
 
 `lo` es el interfaz de loopback, es decir el localhost conectandose a si mismo. Normalmente las interfaces activas aparecen como `UP`. Elegir interfaz en Wirewhark y pinchar en capturar. 
 
-Abrir una web en el navegador, por ejemplo `https://phrack.org/issues/72/linenoise_md#article`. Parar la captura y filtrar por HTTP para buscar la primera peticion GET.
+Abrir una web en el navegador, por ejemplo `https://phrack.org/issues/72/linenoise_md#article`. Parar la captura y filtrar por HTTP para buscar la primera petición GET.
 
 > ¿Qué protocolos se usan? ¿Que bits del mensaje se corresponden con cada uno?  
 > *Se usa el protocolo* ***IPv6*** *para la capa de Red, el protocolo* ***TCP*** *para la capa de Transporte y el* ***HTTP*** *para la capa de Aplicación*
