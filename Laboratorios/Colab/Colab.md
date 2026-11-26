@@ -36,9 +36,11 @@ print("Hi Colab World")
 
 Añade una celda de texto.
 
-> ¿Qué diferencia existe entre una celda de código y una celda de texto?
+> ¿Qué diferencia existe entre una celda de código y una celda de texto?  
+*Las celdas de código son ejecutables, mientras que las de texto solo renderizan el texto con un formato*
 
-> ¿Qué ocurre si ejecutas varias veces la misma celda?
+> ¿Qué ocurre si ejecutas varias veces la misma celda?  
+*Que se devuelve varias veces el resultado esperado*
 
 ### Conocer el entorno de ejecución
 
@@ -63,9 +65,11 @@ Comprueba el contenido del directorio actual:
 !ls
 ```
 
-> ¿Dónde se ejecuta realmente el código?
+> ¿Dónde se ejecuta realmente el código?  
+*En una máquina virtual Linux en los servidores de Google*
 
-> ¿Qué diferencia existe entre tu ordenador local y el entorno de ejecución de Colab?
+> ¿Qué diferencia existe entre tu ordenador local y el entorno de ejecución de Colab?  
+*El entorno de ejecución de Colab es remoto, y no tengo acceso físico a él, además de que se trata de una máquina virtual, que comparte los recursros de una máquina física con otras máquians virtuales. Mi ordenador local se trata de una sola máquina física que utiliza sus propios recursos hardware*
 
 ### Trabajar con datos
 
@@ -97,9 +101,11 @@ Obtén estadísticas descriptivas:
 df.describe()
 ```
 
-> ¿Cuántas filas y columnas contiene el conjunto de datos?
+> ¿Cuántas filas y columnas contiene el conjunto de datos?  
+*Contiene 5 columnas y 150 filas de información*
 
-> ¿Qué representa cada columna?
+> ¿Qué representa cada columna?  
+*Las columnas represntan medidas acerca de la longitud y anchura del sépalo de las flores muestreadas, la longitud y anchura de sus pétalos y la especie de flor*
 
 ### Visualizar los datos
 
@@ -117,9 +123,11 @@ sns.pairplot(df, hue="species")
 plt.show()
 ```
 
-> ¿Se distinguen visualmente las diferentes especies?
+> ¿Se distinguen visualmente las diferentes especies?  
+*Sí, porque cada especie tiene asociado un color distinto*
 
-> ¿Qué variables parecen más útiles para clasificarlas?
+> ¿Qué variables parecen más útiles para clasificarlas?  
+*Aquellas cuyas distribuciones son más distintas, que en este caso se trata de la anchura del pétalo y su longitud*
 
 ### Entrenar un modelo de Machine Learning
 
@@ -168,9 +176,11 @@ Calcula la precisión:
 accuracy_score(y_test, predictions)
 ```
 
-> ¿Qué significa la precisión obtenida?
+> ¿Qué significa la precisión obtenida?  
+*Indica la proporción de predicciones correctas que ha realizado el modelo sobre el conjunto de prueba (X_test, y_test) respecto al total de muestras evaluadas. Una precisión de `1.0` indica que ha acertado todo*
 
-> ¿Es suficiente una precisión elevada para confiar plenamente en el modelo?
+> ¿Es suficiente una precisión elevada para confiar plenamente en el modelo?  
+*No. Una precisión alta puede verse afectada por sobreajuste (overfitting), desbalanceo de clases, datos de prueba poco representativos, fuga de datos (data leakage) o vulnerabilidad ante entradas manipuladas o anómalas en producción.*
 
 ### Interpretar el modelo
 
@@ -191,9 +201,11 @@ plot_tree(
 plt.show()
 ```
 
-> ¿Qué variables aparecen cerca de la raíz del árbol?
+> ¿Qué variables aparecen cerca de la raíz del árbol?  
+*La anchura y lóngitud de pétalo, que son aquellas cuyas distribuciones para cada especie se diferencian más. Tiene sentido porque son las variables con las que más rápidamente se puede distinguir la especie*
 
-> ¿Por qué puede ser útil entender cómo toma decisiones un modelo?
+> ¿Por qué puede ser útil entender cómo toma decisiones un modelo?  
+*Por conocer los factores en los que se basa a la hora de decidir y poder detectar sesgos o atajos en las decisiones derivados de una muestra sesgada o incompleta*
 
 ### Guardar el notebook en GitHub
 
@@ -203,7 +215,8 @@ O descarga el notebook: File; Download; Download .ipynb
 
 Sube el notebook a tu repositorio de GitHub.
 
-> ¿Qué ventajas tiene almacenar el notebook bajo control de versiones?
+> ¿Qué ventajas tiene almacenar el notebook bajo control de versiones?  
+*Permite llevar un historial de cambios, volver a versiones anteriores si algo falla,tener respaldo ante pérdidas del entorno y colaborar de forma ordenada*
 
 ### Seguridad en Machine Learning
 
@@ -227,9 +240,11 @@ Observa las primeras filas:
 df_poisoned.head(15)
 ```
 
-> ¿Qué efecto puede tener modificar etiquetas de entrenamiento?
+> ¿Qué efecto puede tener modificar etiquetas de entrenamiento?  
+*Pues alterar la realidad de los datos y por tanto entrenar al modelo con datos incorrectos*
 
-> ¿Por qué es importante verificar el origen y calidad de los datos?
+> ¿Por qué es importante verificar el origen y calidad de los datos?  
+*Porque la precisión del modelo predictivo depende totalmente de la calidad de los datos con los que se ha entrenado. No podemos ir uno por uno verificando que los datos sean auténticos, por lo que hemos de poder confiar en su fuente*
 
 #### Modelos con sesgos
 
@@ -239,8 +254,7 @@ Calcula cuántas muestras existen de cada clase:
 df["species"].value_counts()
 ```
 
-> ¿Qué problemas podrían aparecer si una clase estuviera muy poco representada?
-
-> ¿Cómo afectaría esto a la calidad de las predicciones?
+> ¿Qué problemas podrían aparecer si una clase estuviera muy poco representada? ¿Cómo afectaría esto a la calidad de las predicciones?  
+*Sucedería que las distribuciones estadísticas de la muestra serían poco precisas en comparación con las de la realidad, lo que supone que el modelo sea menos preciso también, no solo para detectar los elementos de esa clase, sino también para detectar los elementos de otras clases*
 
 
